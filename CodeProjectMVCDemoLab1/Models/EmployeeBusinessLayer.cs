@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using CodeProjectMVCDemoLab1.DataAccessLayer;
 
 namespace CodeProjectMVCDemoLab1.Models
 {
@@ -42,6 +43,26 @@ namespace CodeProjectMVCDemoLab1.Models
             employees.Add(emp4);
 
             return employees;
+        }
+
+        //public List<Employee> GetEmployees()
+        //{
+        //    SalesERPDAL salesDal = new SalesERPDAL();
+        //    return salesDal.Employees.ToList();
+        //}
+        public Employee SaveEmployee(Employee e)
+        {
+            //SalesERPDAL salesDal = new SalesERPDAL();
+            //salesDal.Employees.Add(e);
+            //salesDal.SaveChanges();
+            //return e;
+                var emp = new Employee
+                {
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    Salary = e.Salary
+                };
+                return e;
         }
     }
 }

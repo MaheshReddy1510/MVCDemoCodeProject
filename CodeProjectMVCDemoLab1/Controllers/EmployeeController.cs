@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace CodeProjectMVCDemoLab1.Controllers
 {
-    public class TestController : Controller
+    public class EmployeeController : Controller
     {
         // GET: Test
         public string GetString()
@@ -45,7 +45,7 @@ namespace CodeProjectMVCDemoLab1.Controllers
         //    return View("MyView", vmEmployee);
         //}
 
-        public ActionResult GetView()
+        public ActionResult Index()
         {
             EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
 
@@ -54,7 +54,7 @@ namespace CodeProjectMVCDemoLab1.Controllers
 
             List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
 
-            foreach(Employee emp in employees)
+            foreach (Employee emp in employees)
             {
                 EmployeeViewModel empViewModel = new EmployeeViewModel();
                 empViewModel.EmployeeName = emp.FirstName + " " + emp.LastName;
@@ -70,8 +70,37 @@ namespace CodeProjectMVCDemoLab1.Controllers
                 empViewModels.Add(empViewModel);
             }
             employeeListViewModel.Employees = empViewModels;
-            employeeListViewModel.UserName = "Admin";
-            return View("MyView",employeeListViewModel);
+            //employeeListViewModel.UserName = "Admin";
+            return View("Index", employeeListViewModel);
+        }
+        public ActionResult AddNew()
+        {
+            return View("CreateEmployee");
+        }
+        
+        public ActionResult SaveEmployee(Employee e,string BtnSubmit)
+        {
+            switch (BtnSubmit)
+            {
+                    
+                    case "Save Employee":
+                    if (ModelState.IsValid)
+                    {
+                        EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+                        empBal.SaveEmployee(e);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        return View("CreateEmployee");
+                    }
+                    
+                    //return Content(e.FirstName + "|" + e.LastName + "|" + e.Salary);
+                    
+                case "Cancel":
+                    return RedirectToAction("Index");
+            }
+            return new EmptyResult(); 
         }
     }
 }

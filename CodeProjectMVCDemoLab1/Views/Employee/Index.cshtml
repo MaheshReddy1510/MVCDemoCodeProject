@@ -21,9 +21,12 @@
 
 
 
-@*@model CodeProjectMVCDemoLab1.Models.Employee;*@
+    @*
+    @model CodeProjectMVCDemoLab1.Models.Employee;
+    *@
 
-@*<div>
+@*
+    <div>
     @{ 
         //CodeProjectMVCDemoLab1.Models.Employee emp = (CodeProjectMVCDemoLab1.Models.Employee)ViewData["Employee"];
         CodeProjectMVCDemoLab1.Models.Employee emp = (CodeProjectMVCDemoLab1.Models.Employee)ViewBag.Employee;
@@ -46,42 +49,66 @@
                  Employee Salary: @Model.Salary.ToString("C")
             </ span >
      }
-</div>*@
+    </div>
+*@
 
 
 
 
-@*@using CodeProjectMVCDemoLab1.Models;
-@Model EmployeeViewModel;
-Hello @Model.UserName
-<hr/>
-<div>
-    <b>Employee Details:</b><br/>
-    Employee Name : @Model.EmployeeName<br/>
-    <span style="background-color : @Model.SalaryColor">
-        Employee Salary :@Model.Salary<br />
-    </span>
-</div>*@
+@*
+
+    @using CodeProjectMVCDemoLab1.Models;
+    @Model EmployeeViewModel;
+    Hello @Model.UserName
+    <hr/>
+    <div>
+        <b>Employee Details:</b><br/>
+        Employee Name : @Model.EmployeeName<br/>
+        <span style="background-color : @Model.SalaryColor">
+            Employee Salary :@Model.Salary<br />
+        </span>
+    </div>
+
+*@
 
 
 
 
 @using CodeProjectMVCDemoLab1.ViewModels;
 @Model EmployeeListViewModel;
-Hello @Model.UserName
-<hr />
-<div>
-    <table>
-        <tr>
-            <th>Employee Name</th>
-            <th>Salary</th>
-        </tr>
-        @foreach(EmployeeViewModel item in Model.Employees)
-        {
+
+    @*
+    @Hello @Model.UserName
+    <hr />
+    *@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <br/>
+    <br/>
+    <a href="/Employee/AddNew">AddNew</a>
+    <br/>
+    <div>
+        <table>
             <tr>
-                <td>@item.EmployeeName</td>
-                <td style="background-color:@item.SalaryColor">@item.Salary</td>
+                <th>Employee Name</th>
+                <th>Salary</th>
             </tr>
-        }
-    </table>
-</div>       
+            @foreach (EmployeeViewModel item in Model.Employees)
+            {
+                <tr>
+                    <td>@item.EmployeeName</td>
+                    <td style="background-color:@item.SalaryColor">@item.Salary</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</body>
+</html>
